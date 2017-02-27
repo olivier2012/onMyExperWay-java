@@ -7,6 +7,7 @@ package firstgui;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
 import java.util.Scanner;
 
 /**
@@ -41,11 +42,11 @@ public class myJFrame extends javax.swing.JFrame {
 
         jMenu3 = new javax.swing.JMenu();
         jButton1 = new javax.swing.JButton();
+        button1 = new java.awt.Button();
+        jButton2 = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
-        button1 = new java.awt.Button();
-        jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTree1 = new javax.swing.JTree();
@@ -57,6 +58,7 @@ public class myJFrame extends javax.swing.JFrame {
 
         jMenu3.setText("jMenu3");
 
+        setFocusable(button1.isVisible());
         setLocation(new java.awt.Point(250, 70));
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -71,12 +73,6 @@ public class myJFrame extends javax.swing.JFrame {
             }
         });
 
-        jTextField1.setText("Please input the path");
-
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
-
         button1.setLabel("Check");
         button1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -90,6 +86,25 @@ public class myJFrame extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
+
+        jTextField1.setText("Please input the path");
+        jTextField1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTextField1FocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextField1FocusLost(evt);
+            }
+        });
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane1.setViewportView(jTextArea1);
 
         jButton3.setText("Quit");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -166,9 +181,17 @@ public class myJFrame extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-      jTextField1.setText(" "); 
-      Scanner sc = new Scanner(System.in);
-      jTextField1.setText(sc.nextLine());
+//      Scanner sc = new Scanner(System.in);
+//      jTextField1.setText(sc.nextLine());
+        String dirPath =jTextField1.getText();
+        File dir = new File(dirPath);
+        if (dir.exists()&&dir.isDirectory()){
+           String [] names = dir.list();
+           for(String name:names){
+              jTextArea1.append(name + "\r\n");
+           }
+         
+        }
       
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -201,6 +224,46 @@ public class myJFrame extends javax.swing.JFrame {
         System.out.println("Mouse click has happened at Form !! "); 
     }//GEN-LAST:event_formMousePressed
 
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+//        jTextField1.setText(" ");   
+//        jTextField1.set .addMouseListener(new MouseAdapt(){
+//                  public void mouseClicked(MouseEvent evt){
+//                            
+//                  } 
+//        });
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jTextField1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField1FocusGained
+        // TODO add your handling code here:
+           System.out.println("The text field1 got focus --- ! ");
+        
+//         String dirPath =jTextField1.getText();
+//            File dir = new File(dirPath);
+// //           jTextField1.setText(" "); 
+//            if (dir.exists()&&dir.isDirectory()){
+//               String [] names = dir.list();
+//             for(String name:names){
+//              jTextArea1.append(name + "\r\n");}}
+    }//GEN-LAST:event_jTextField1FocusGained
+
+    private void jTextField1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField1FocusLost
+        // TODO add your handling code here:
+//        if (jTextField1.getText()==" ")
+//        { System.out.println("text field1 lost focus ... ! ");
+//            jTextField1.setText("Please input the Path information :  ");}
+//        else 
+//        {
+//            String dirPath =jTextField1.getText();
+//            File dir = new File(dirPath);
+//            if (dir.exists()&&dir.isDirectory()){
+//               String [] names = dir.list();
+//             for(String name:names){
+//              jTextArea1.append(name + "\r\n");
+//          }
+//        }
+    }//GEN-LAST:event_jTextField1FocusLost
+//    }
   //  public void jTree1.
     /**
      * @param args the command line arguments
