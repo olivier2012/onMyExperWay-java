@@ -9,6 +9,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.util.Scanner;
+import static javafx.scene.input.KeyCode.ENTER;
 
 /**
  *
@@ -40,6 +41,9 @@ public class myJFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jDialog1 = new javax.swing.JDialog();
+        jLabel1 = new javax.swing.JLabel();
+        jButton4 = new javax.swing.JButton();
         jMenu3 = new javax.swing.JMenu();
         jButton1 = new javax.swing.JButton();
         button1 = new java.awt.Button();
@@ -56,6 +60,43 @@ public class myJFrame extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
 
+        jDialog1.setTitle("Message");
+        jDialog1.setAlwaysOnTop(true);
+        jDialog1.setModal(true);
+
+        jLabel1.setText("jLabel1");
+
+        jButton4.setText("OK");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
+        jDialog1.getContentPane().setLayout(jDialog1Layout);
+        jDialog1Layout.setHorizontalGroup(
+            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialog1Layout.createSequentialGroup()
+                .addGroup(jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jDialog1Layout.createSequentialGroup()
+                        .addGap(90, 90, 90)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 416, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jDialog1Layout.createSequentialGroup()
+                        .addGap(267, 267, 267)
+                        .addComponent(jButton4)))
+                .addGap(113, 113, 113))
+        );
+        jDialog1Layout.setVerticalGroup(
+            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialog1Layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34)
+                .addComponent(jButton4)
+                .addContainerGap(33, Short.MAX_VALUE))
+        );
+
         jMenu3.setText("jMenu3");
 
         setFocusable(button1.isVisible());
@@ -63,6 +104,11 @@ public class myJFrame extends javax.swing.JFrame {
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 formMousePressed(evt);
+            }
+        });
+        addWindowStateListener(new java.awt.event.WindowStateListener() {
+            public void windowStateChanged(java.awt.event.WindowEvent evt) {
+                formWindowStateChanged(evt);
             }
         });
 
@@ -101,6 +147,14 @@ public class myJFrame extends javax.swing.JFrame {
                 jTextField1ActionPerformed(evt);
             }
         });
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextField1KeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField1KeyTyped(evt);
+            }
+        });
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -113,6 +167,13 @@ public class myJFrame extends javax.swing.JFrame {
             }
         });
 
+        jTree1.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+                jTree1InputMethodTextChanged(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTree1);
 
         jTextArea2.setColumns(20);
@@ -189,9 +250,17 @@ public class myJFrame extends javax.swing.JFrame {
            String [] names = dir.list();
            for(String name:names){
               jTextArea1.append(name + "\r\n");
-           }
+           }}
+        else
+        {
+              jDialog1.setBounds(200,100,600,250);
+//              jDialog1.setFocusableWindowState(true);
+              jDialog1.setAlwaysOnTop(true);
+              jLabel1.setText("The input path does not exists or wrong : "+ dirPath);
+              jDialog1.setVisible(true);
+                }
          
-        }
+       
       
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -263,6 +332,44 @@ public class myJFrame extends javax.swing.JFrame {
 //          }
 //        }
     }//GEN-LAST:event_jTextField1FocusLost
+
+    private void formWindowStateChanged(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formWindowStateChanged
+
+    private void jTree1InputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jTree1InputMethodTextChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTree1InputMethodTextChanged
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        jDialog1.setVisible(false);    
+        
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jTextField1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyPressed
+        // TODO add your handling code here:
+        if(evt.equals("ENTER")){
+        String dirPath =jTextField1.getText();
+        File dir = new File(dirPath);
+        if (dir.exists()&&dir.isDirectory()){
+           String [] names = dir.list();
+           for(String name:names){
+              jTextArea1.append(name + "\r\n");
+           }}
+        else
+        {
+              jDialog1.setBounds(200,100,600,250);
+//              jDialog1.setFocusableWindowState(true);
+              jDialog1.setAlwaysOnTop(true);
+              jLabel1.setText("The input path does not exists or wrong : "+ dirPath);
+              jDialog1.setVisible(true);
+                } 
+    }//GEN-LAST:event_jTextField1KeyPressed
+    }
+    private void jTextField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1KeyTyped
 //    }
   //  public void jTree1.
     /**
@@ -295,7 +402,9 @@ public class myJFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new myJFrame().setVisible(true);
+               myJFrame mjf1;
+               mjf1 = new myJFrame();
+               mjf1.setVisible(true);
             }
         });
     }
@@ -305,6 +414,9 @@ public class myJFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JDialog jDialog1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
